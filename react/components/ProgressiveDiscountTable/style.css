@@ -1,0 +1,15 @@
+.container {
+  margin-top: 1rem;
+}
+
+.container
+  :global(.vtex-styleguide-9-x-jsFocusVisible)
+  :local(> div:nth-child(1) > div:nth-child(1)) {
+  -webkit-box-flex: unset;
+  flex-grow: unset;
+}
+
+.currency {
+  color: #000711;
+  background-color: #fff3f6;
+}
