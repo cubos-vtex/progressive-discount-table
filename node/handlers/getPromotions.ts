@@ -1,14 +1,14 @@
 import { ServiceContext, UserInputError } from '@vtex/api'
 import { Clients } from '../clients'
 
-export async function getPromotion(ctx: ServiceContext<Clients>) {
+export async function getPromotions(ctx: ServiceContext<Clients>) {
   const {
     vtex: {
       route: {
-        params: { promotion },
+        params: { promotion, skuId },
       },
     },
-    clients: { apps },
+    clients: { apps, promotion: promotionCLient },
   } = ctx
 
   const appSettings = await apps.getAppSettings(process.env.VTEX_APP_ID!)
@@ -20,20 +20,16 @@ export async function getPromotion(ctx: ServiceContext<Clients>) {
     throw new UserInputError('api settings are required')
   }
 
-  if (!promotion) {
-    throw new UserInputError('promotionId is required')
-  }
-
   try {
-    const response = await ctx.clients.promotion.getPromotion(
-      promotion as string,
-      apiKey,
-      apiToken
-    )
+    promotionCLient.setApiSettings(apiKey, apiToken)
+    const response = promotion
+      ? await promotionCLient.getPromotions(promotion as string)
+      : await promotionCLient.getProgressivePromotions(skuId as string)
+
     ctx.status = 200
     ctx.set('Cache-Control', 'no-cache')
     ctx.body = JSON.stringify(response, null, 2)
-  } catch {
+  } catch (e) {
     throw new UserInputError(`invalid promotionId: ${promotion}`)
   }
 }

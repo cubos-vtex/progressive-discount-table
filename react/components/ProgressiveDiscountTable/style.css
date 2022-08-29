@@ -1,5 +1,4 @@
 .container {
-  margin-top: 1rem;
 }
 
 .container
@@ -12,4 +11,11 @@
 .currency {
   color: #000711;
   background-color: #fff3f6;
+}
+
+.quantityArrow {
+  font-size: 18px;
+}
+
+.modalContainer {
 }

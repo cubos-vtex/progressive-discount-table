@@ -1,6 +1,6 @@
 import { ClientsConfig, LRUCache, method, Service } from '@vtex/api'
 import { Clients } from './clients'
-import { getPromotion } from './handlers/getPromotion'
+import { getPromotions } from './handlers/getPromotions'
 
 const TIMEOUT_MS = 800
 const memoryCache = new LRUCache<string, never>({ max: 5000 })
@@ -22,7 +22,13 @@ export default new Service({
   clients,
   routes: {
     promotion: method({
-      GET: getPromotion,
+      GET: getPromotions,
+    }),
+    progressivePromotions: method({
+      GET: getPromotions,
+    }),
+    progressivePromotionsBySku: method({
+      GET: getPromotions,
     }),
   },
 })

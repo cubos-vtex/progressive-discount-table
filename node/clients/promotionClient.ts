@@ -4,7 +4,9 @@ import { JanusClient } from '@vtex/api'
 const FIVE_SECONDS_MS = 5 * 1000
 
 export default class CollectionClient extends JanusClient {
-  private baseUrl = '/api/rnb/pvt/calculatorconfiguration'
+  private baseUrl = '/api/rnb/pvt'
+  private apiKey: string = ''
+  private apiToken: string = ''
 
   constructor(context: IOContext, options?: InstanceOptions) {
     super(context, {
@@ -17,13 +19,57 @@ export default class CollectionClient extends JanusClient {
     })
   }
 
-  public getPromotion(promotion: string, apiKey: string, apiToken: string) {
-    return this.http.get(`${this.baseUrl}/${promotion}`, {
-      headers: {
-        ...this.options?.headers,
-        'X-VTEX-API-AppKey': apiKey,
-        'X-VTEX-API-AppToken': apiToken,
-      },
-    })
+  public setApiSettings(apiKey: string, apiToken: string) {
+    this.apiKey = apiKey
+    this.apiToken = apiToken
+  }
+
+  public getPromotions(promotion?: string) {
+    return this.http.get(
+      `${this.baseUrl}/${
+        promotion
+          ? `calculatorconfiguration/${promotion}`
+          : 'benefits/calculatorconfiguration'
+      }`,
+      {
+        headers: {
+          ...this.options?.headers,
+          'X-VTEX-API-AppKey': this.apiKey,
+          'X-VTEX-API-AppToken': this.apiToken,
+        },
+      }
+    )
+  }
+
+  public async getProgressivePromotions(skuId?: string) {
+    const allPromotions = await this.getPromotions()
+
+    const allProgressiveAndActivePromotions: Record<
+      string,
+      any
+    >[] = allPromotions.items.filter(
+      (promotion: Record<string, any>) =>
+        promotion.type === 'progressive' && promotion.status === 'active'
+    )
+
+    const completeProgressiveAndActivePromotions = await Promise.all(
+      allProgressiveAndActivePromotions.map(async (promotion) => {
+        const completePromotion = await this.getPromotions(
+          promotion.idCalculatorConfiguration
+        )
+        return { ...promotion, ...completePromotion }
+      })
+    )
+
+    if (skuId) {
+      return completeProgressiveAndActivePromotions.find(
+        (promotion) =>
+          promotion.listSku1BuyTogether.filter(
+            (sku: Record<string, any>) => sku.id === skuId
+          )?.length
+      )
+    }
+
+    return completeProgressiveAndActivePromotions
   }
 }

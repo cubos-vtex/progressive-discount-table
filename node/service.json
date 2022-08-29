@@ -6,6 +6,26 @@
   "maxReplicas": 4,
   "workers": 1,
   "routes": {
+    "progressivePromotions": {
+      "path": "/_v/progressive-promotions",
+      "public": true,
+      "policies": [
+        {
+          "effect": "allow",
+          "actions": ["get"]
+        }
+      ]
+    },
+    "progressivePromotionsBySku": {
+      "path": "/_v/progressive-promotions/:skuId",
+      "public": true,
+      "policies": [
+        {
+          "effect": "allow",
+          "actions": ["get"]
+        }
+      ]
+    },
     "promotion": {
       "path": "/_v/promotion/:promotion",
       "public": true,
