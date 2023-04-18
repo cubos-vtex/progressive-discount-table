@@ -1,7 +1,9 @@
 import { useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 import { useCssHandles } from 'vtex.css-handles'
 import { FormattedCurrency } from 'vtex.format-currency'
 import { Collapsible, Modal } from 'vtex.styleguide'
+
 import styles from './style.css'
 
 const WrapperProgressiveDiscount = ({
@@ -14,7 +16,11 @@ const WrapperProgressiveDiscount = ({
   const handles = useCssHandles(Object.keys(styles))
   const [isOpen, setOpen] = useState(false)
 
-  const header = <span className="c-muted-1 fw5">Ver preço por volume</span>
+  const header = (
+    <span className="c-muted-1 fw5">
+      <FormattedMessage id="store/view-price-by-volume" />
+    </span>
+  )
 
   const table = (
     <ul className="list pl0 c-muted-1">

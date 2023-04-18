@@ -5,8 +5,8 @@ const FIVE_SECONDS_MS = 5 * 1000
 
 export default class CollectionClient extends JanusClient {
   private baseUrl = '/api/rnb/pvt'
-  private apiKey: string = ''
-  private apiToken: string = ''
+  private apiKey = ''
+  private apiToken = ''
 
   constructor(context: IOContext, options?: InstanceOptions) {
     super(context, {
@@ -44,10 +44,9 @@ export default class CollectionClient extends JanusClient {
   public async getProgressivePromotions(skuId?: string) {
     const allPromotions = await this.getPromotions()
 
-    const allProgressiveAndActivePromotions: Record<
-      string,
-      any
-    >[] = allPromotions.items.filter(
+    const allProgressiveAndActivePromotions: Array<
+      Record<string, any>
+    > = allPromotions.items.filter(
       (promotion: Record<string, any>) =>
         promotion.type === 'progressive' && promotion.status === 'active'
     )
@@ -57,6 +56,7 @@ export default class CollectionClient extends JanusClient {
         const completePromotion = await this.getPromotions(
           promotion.idCalculatorConfiguration
         )
+
         return { ...promotion, ...completePromotion }
       })
     )
