@@ -1,4 +1,6 @@
-import { useState } from 'react'
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import React, { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { useCssHandles } from 'vtex.css-handles'
 import { FormattedCurrency } from 'vtex.format-currency'
@@ -26,6 +28,7 @@ const WrapperProgressiveDiscount = ({
     <ul className="list pl0 c-muted-1">
       {benefits.map((benefit, index) => (
         <li
+          key={`benefit-${index}`}
           className={`${
             index !== benefits.length - 1 ? 'bb' : ''
           } mt6 pb6 b--muted-3 flex justify-between items-center`}

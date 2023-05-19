@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { InstanceOptions, IOContext } from '@vtex/api'
 import { JanusClient } from '@vtex/api'
 
@@ -44,12 +45,11 @@ export default class CollectionClient extends JanusClient {
   public async getProgressivePromotions(skuId?: string) {
     const allPromotions = await this.getPromotions()
 
-    const allProgressiveAndActivePromotions: Array<
-      Record<string, any>
-    > = allPromotions.items.filter(
-      (promotion: Record<string, any>) =>
-        promotion.type === 'progressive' && promotion.status === 'active'
-    )
+    const allProgressiveAndActivePromotions: Array<Record<string, any>> =
+      allPromotions.items.filter(
+        (promotion: Record<string, any>) =>
+          promotion.type === 'progressive' && promotion.status === 'active'
+      )
 
     const completeProgressiveAndActivePromotions = await Promise.all(
       allProgressiveAndActivePromotions.map(async (promotion) => {

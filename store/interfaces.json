@@ -1,5 +1,8 @@
 {
   "progressive-discount-table": {
     "component": "ProgressiveDiscountTable"
+  },
+  "progressive-discount-info": {
+    "component": "ProgressiveDiscountInfo"
   }
 }

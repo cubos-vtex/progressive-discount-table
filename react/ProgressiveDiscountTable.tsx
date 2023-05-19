@@ -1,3 +1,3 @@
-import ListProductsCollectionOrder from "./components/ProgressiveDiscountTable";
+import ProgressiveDiscountTable from './components/ProgressiveDiscountTable'
 
-export default ListProductsCollectionOrder;
+export default ProgressiveDiscountTable

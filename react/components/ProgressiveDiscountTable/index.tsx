@@ -1,4 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React from 'react'
 import { useProduct } from 'vtex.product-context'
+
 import WrapperProgressiveDiscount from './wrapper'
 
 const ProgressiveDiscountTable = () => {
@@ -23,7 +26,7 @@ const ProgressiveDiscountTable = () => {
           title={teasers[0].name}
           basePrice={Price}
           measurementUnit={measurementUnit}
-          benefits={teasers.map((t) => ({
+          benefits={teasers.map((t: any) => ({
             minQuantity: t?.conditions?.minimumQuantity,
             discount:
               t?.effects?.parameters[0].name === 'PercentualDiscount'
@@ -41,9 +44,9 @@ const ProgressiveDiscountTable = () => {
     <WrapperProgressiveDiscount
       basePrice={Price}
       measurementUnit={measurementUnit}
-      benefits={benefits.map((b) => ({
-        minQuantity: b?.items[0]?.minQuantity,
-        discount: b?.items[0]?.discount,
+      benefits={benefits.map((b: any) => ({
+        minQuantity: b?.items?.[0]?.minQuantity,
+        discount: b?.items?.[0]?.discount,
       }))}
     />
   )

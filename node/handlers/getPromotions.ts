@@ -1,5 +1,7 @@
-import { ServiceContext, UserInputError } from '@vtex/api'
-import { Clients } from '../clients'
+import type { ServiceContext } from '@vtex/api'
+import { UserInputError } from '@vtex/api'
+
+import type { Clients } from '../clients'
 
 export async function getPromotions(ctx: ServiceContext<Clients>) {
   const {
@@ -11,7 +13,7 @@ export async function getPromotions(ctx: ServiceContext<Clients>) {
     clients: { apps, promotion: promotionCLient },
   } = ctx
 
-  const appSettings = await apps.getAppSettings(process.env.VTEX_APP_ID!)
+  const appSettings = await apps.getAppSettings(process.env.VTEX_APP_ID ?? '')
 
   const apiKey = appSettings['X-VTEX-API-AppKey'] as string
   const apiToken = appSettings['X-VTEX-API-AppToken'] as string
