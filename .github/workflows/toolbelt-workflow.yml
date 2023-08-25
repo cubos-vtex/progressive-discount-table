@@ -31,5 +31,5 @@ jobs:
       - name: Release App
         run: vtex release patch stable
 
-      - name: Install App
+      - name: Deploy App
         run: vtex deploy --force --yes
