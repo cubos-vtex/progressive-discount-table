@@ -20,7 +20,11 @@ const ProgressiveDiscountTable = () => {
 
   console.log({ productContextValue })
 
-  if (!benefits?.length) {
+  const progressiveBenefits = benefits.filter(
+    (b: any) => b?.teaserType === 'Catalog'
+  )
+
+  if (!progressiveBenefits?.length) {
     if (teasers?.length && teasers[0].effects.parameters.length) {
       return (
         <WrapperProgressiveDiscount
@@ -42,15 +46,11 @@ const ProgressiveDiscountTable = () => {
     return null
   }
 
-  if (!benefits.some((b: any) => b?.teaserType === 'Catalog')) {
-    return null
-  }
-
   return (
     <WrapperProgressiveDiscount
       basePrice={Price}
       measurementUnit={measurementUnit}
-      benefits={benefits.map((b: any) => ({
+      benefits={progressiveBenefits.map((b: any) => ({
         minQuantity: b?.items?.[0]?.minQuantity,
         discount: b?.items?.[0]?.discount,
       }))}
