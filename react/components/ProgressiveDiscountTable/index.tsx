@@ -18,6 +18,8 @@ const ProgressiveDiscountTable = () => {
     },
   } = productContextValue
 
+  console.log({ productContextValue })
+
   if (!benefits?.length) {
     if (teasers?.length && teasers[0].effects.parameters.length) {
       return (
@@ -37,6 +39,10 @@ const ProgressiveDiscountTable = () => {
       )
     }
 
+    return null
+  }
+
+  if (!benefits.some((b: any) => b?.teaserType === 'Catalog')) {
     return null
   }
 

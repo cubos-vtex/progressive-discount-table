@@ -24,8 +24,21 @@ const WrapperProgressiveDiscount = ({
     </span>
   )
 
+  const firstQuantity = +benefits[0]?.minQuantity
+
   const table = (
     <ul className="list pl0 c-muted-1">
+      {firstQuantity > 1 && (
+        <li className="bb mt6 pb6 b--muted-3 flex justify-between items-center">
+          <div>
+            1 <span className={handles.quantityArrow}>&#10230;</span>{' '}
+            {firstQuantity - 1}
+          </div>
+          <div className={`${handles.currency} pa2`}>
+            <FormattedCurrency value={+basePrice} /> / {measurementUnit}
+          </div>
+        </li>
+      )}
       {benefits.map((benefit, index) => (
         <li
           key={`benefit-${index}`}
