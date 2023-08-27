@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { useCssHandles } from 'vtex.css-handles'
@@ -8,23 +6,48 @@ import { Collapsible, Modal } from 'vtex.styleguide'
 
 import styles from './style.css'
 
+interface Props {
+  benefits: Array<{
+    minQuantity: number
+    discount: number
+  }>
+  basePrice: number
+  measurementUnit: string
+  isModal?: boolean
+  title?: string
+}
+
 const WrapperProgressiveDiscount = ({
   benefits,
   basePrice,
   measurementUnit,
   isModal,
   title,
-}: WrapperProgressiveDiscountProps) => {
-  const handles = useCssHandles(Object.keys(styles))
+}: Props) => {
+  const handles = useCssHandles([
+    'title',
+    'modalContainer',
+    ...Object.keys(styles),
+  ])
+
   const [isOpen, setOpen] = useState(false)
 
   const header = (
-    <span className="c-muted-1 fw5">
+    <span className={`c-muted-1 fw5 ${handles.title}`}>
       <FormattedMessage id="store/view-price-by-volume" />
     </span>
   )
 
-  const firstQuantity = +benefits[0]?.minQuantity
+  const firstQuantity = benefits[0]?.minQuantity
+
+  const renderPrice = (price: number, discount: number, unit?: string) => {
+    return (
+      <span className={`${handles.currency} pa2`}>
+        <FormattedCurrency value={price * (1 - discount / 100)} />
+        {!!unit && ` / ${unit}`}
+      </span>
+    )
+  }
 
   const table = (
     <ul className="list pl0 c-muted-1">
@@ -34,9 +57,7 @@ const WrapperProgressiveDiscount = ({
             1 <span className={handles.quantityArrow}>&#10230;</span>{' '}
             {firstQuantity - 1}
           </div>
-          <div className={`${handles.currency} pa2`}>
-            <FormattedCurrency value={+basePrice} /> / {measurementUnit}
-          </div>
+          {renderPrice(basePrice, 0, measurementUnit)}
         </li>
       )}
       {benefits.map((benefit, index) => (
@@ -51,42 +72,41 @@ const WrapperProgressiveDiscount = ({
               <>
                 {benefit?.minQuantity}{' '}
                 <span className={handles.quantityArrow}>&#10230;</span>{' '}
-                {+benefits[index + 1]?.minQuantity - 1}
+                {benefits[index + 1]?.minQuantity - 1}
               </>
             ) : (
               `${benefit?.minQuantity}+`
             )}
           </div>
-          <div className={`${handles.currency} pa2`}>
-            <FormattedCurrency
-              value={+basePrice * (1 - +benefit?.discount / 100)}
-            />{' '}
-            / {measurementUnit}
-          </div>
+          {renderPrice(basePrice, benefit?.discount, measurementUnit)}
         </li>
       ))}
     </ul>
   )
+
+  const preventDefault = (e: React.MouseEvent | React.KeyboardEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+  }
+
+  const toggle = () => setOpen((prevOpen) => !prevOpen)
 
   return (
     <div
       className={`${handles.container} ${
         isModal ? handles.modalContainer : ''
       }`}
-      onClick={(e) => {
-        e.preventDefault()
-        e.stopPropagation()
-      }}
+      role="button"
+      tabIndex={-1}
+      onKeyDown={preventDefault}
+      onClick={preventDefault}
     >
       {isModal ? (
         <>
-          <span onClick={() => setOpen((prevOpen) => !prevOpen)}>{header}</span>
-          <Modal
-            centered
-            title={title}
-            isOpen={isOpen}
-            onClose={() => setOpen((prevOpen) => !prevOpen)}
-          >
+          <span role="button" tabIndex={-1} onKeyDown={toggle} onClick={toggle}>
+            {header}
+          </span>
+          <Modal centered title={title} isOpen={isOpen} onClose={toggle}>
             {table}
           </Modal>
         </>
@@ -95,7 +115,7 @@ const WrapperProgressiveDiscount = ({
           align="right"
           caretColor="base"
           header={header}
-          onClick={() => setOpen((prevOpen) => !prevOpen)}
+          onClick={toggle}
           isOpen={isOpen}
         >
           {table}

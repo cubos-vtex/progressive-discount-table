@@ -1,4 +1,6 @@
-import { ClientsConfig, LRUCache, method, Service } from '@vtex/api'
+import type { ClientsConfig } from '@vtex/api'
+import { LRUCache, method, Service } from '@vtex/api'
+
 import { Clients } from './clients'
 import { getPromotions } from './handlers/getPromotions'
 
