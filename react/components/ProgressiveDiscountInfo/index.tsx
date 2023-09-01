@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl'
 import { useCssHandles } from 'vtex.css-handles'
 import { FormattedCurrency } from 'vtex.format-currency'
 
-import { useProductWithBenefits } from '../../hooks/useProductWithBenefits'
+import { useProductWithBenefits } from '../../services/useProductWithBenefits'
 import styles from './style.css'
 
 const ProgressiveDiscountInfo = () => {

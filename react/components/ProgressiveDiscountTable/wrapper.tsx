@@ -2,26 +2,27 @@ import React, { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { useCssHandles } from 'vtex.css-handles'
 import { FormattedCurrency } from 'vtex.format-currency'
-import { Collapsible, Modal } from 'vtex.styleguide'
+import { Button, Collapsible, Modal } from 'vtex.styleguide'
 
 import styles from './style.css'
 
 interface Props {
+  isModal: boolean
   benefits: Array<{
     minQuantity: number
-    discount: number
+    discount?: number
+    fixedPrice?: number
   }>
   basePrice: number
   measurementUnit: string
-  isModal?: boolean
   title?: string
 }
 
 const WrapperProgressiveDiscount = ({
+  isModal,
   benefits,
   basePrice,
   measurementUnit,
-  isModal,
   title,
 }: Props) => {
   const handles = useCssHandles([
@@ -30,7 +31,7 @@ const WrapperProgressiveDiscount = ({
     ...Object.keys(styles),
   ])
 
-  const [isOpen, setOpen] = useState(false)
+  const [isOpen, setOpen] = useState(!isModal)
 
   const header = (
     <span className={`c-muted-1 fw5 ${handles.title}`}>
@@ -40,13 +41,21 @@ const WrapperProgressiveDiscount = ({
 
   const firstQuantity = benefits[0]?.minQuantity
 
-  const renderPrice = (price: number, discount: number, unit?: string) => {
+  const renderFixedPrice = (fixedPrice: number, unit?: string) => {
     return (
       <span className={`${handles.currency} pa2`}>
-        <FormattedCurrency value={price * (1 - discount / 100)} />
+        <FormattedCurrency value={fixedPrice} />
         {!!unit && ` / ${unit}`}
       </span>
     )
+  }
+
+  const renderPromotionPrice = (
+    price: number,
+    discount: number,
+    unit?: string
+  ) => {
+    return renderFixedPrice(price * (1 - discount / 100), unit)
   }
 
   const table = (
@@ -57,7 +66,7 @@ const WrapperProgressiveDiscount = ({
             1 <span className={handles.quantityArrow}>&#10230;</span>{' '}
             {firstQuantity - 1}
           </div>
-          {renderPrice(basePrice, 0, measurementUnit)}
+          {renderFixedPrice(basePrice, measurementUnit)}
         </li>
       )}
       {benefits.map((benefit, index) => (
@@ -78,7 +87,14 @@ const WrapperProgressiveDiscount = ({
               `${benefit?.minQuantity}+`
             )}
           </div>
-          {renderPrice(basePrice, benefit?.discount, measurementUnit)}
+          {benefit?.fixedPrice
+            ? renderFixedPrice(benefit.fixedPrice, measurementUnit)
+            : !!benefit?.discount &&
+              renderPromotionPrice(
+                basePrice,
+                benefit.discount,
+                measurementUnit
+              )}
         </li>
       ))}
     </ul>
@@ -103,10 +119,19 @@ const WrapperProgressiveDiscount = ({
     >
       {isModal ? (
         <>
-          <span role="button" tabIndex={-1} onKeyDown={toggle} onClick={toggle}>
+          {/* <span role="button" tabIndex={-1} onKeyDown={toggle} onClick={toggle}>
             {header}
-          </span>
+          </span> */}
+          <Button
+            noUpperCase
+            variation="tertiary"
+            size="small"
+            onClick={toggle}
+          >
+            <FormattedMessage id="store/view-price-by-volume" />
+          </Button>
           <Modal centered title={title} isOpen={isOpen} onClose={toggle}>
+            {header}
             {table}
           </Modal>
         </>

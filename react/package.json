@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@tabler/icons": "^1.39.1",
+    "@tanstack/react-query": "^4.33.0",
     "apollo-client": "^2.6.8",
     "graphql-tag": "^2.11.0",
     "react": "^16.12.0",
@@ -17,6 +18,7 @@
     "@vtex/tsconfig": "^0.4.4",
     "apollo-cache-inmemory": "^1.6.5",
     "graphql": "^14.6.0",
+    "ssesandbox04.progressive-discount-table": "https://dev--vtextitantools.myvtex.com/_v/private/typings/linked/v1/ssesandbox04.progressive-discount-table@1.0.6+build1693532464/public/@types/ssesandbox04.progressive-discount-table",
     "typescript": "3.9.7",
     "vtex.css-handles": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.css-handles@0.4.4/public/@types/vtex.css-handles",
     "vtex.format-currency": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.format-currency@0.4.1/public/@types/vtex.format-currency",

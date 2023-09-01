@@ -26,6 +26,16 @@
         }
       ]
     },
+    "fixedPricesBySku": {
+      "path": "/_v/fixed-prices/:skuId",
+      "public": true,
+      "policies": [
+        {
+          "effect": "allow",
+          "actions": ["get", "options"]
+        }
+      ]
+    },
     "promotion": {
       "path": "/_v/promotion/:promotion",
       "public": true,

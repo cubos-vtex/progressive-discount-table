@@ -5858,9 +5858,9 @@ sprintf-js@~1.0.2:
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
   integrity sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==
 
-"ssesandbox04.progressive-discount-table@https://dev--vtextitantools.myvtex.com/_v/private/typings/linked/v1/ssesandbox04.progressive-discount-table@1.0.5+build1693083968/public/@types/ssesandbox04.progressive-discount-table":
+"ssesandbox04.progressive-discount-table@https://dev--vtextitantools.myvtex.com/_v/private/typings/linked/v1/ssesandbox04.progressive-discount-table@1.0.6+build1693532464/public/@types/ssesandbox04.progressive-discount-table":
   version "0.0.0"
-  resolved "https://dev--vtextitantools.myvtex.com/_v/private/typings/linked/v1/ssesandbox04.progressive-discount-table@1.0.5+build1693083968/public/@types/ssesandbox04.progressive-discount-table#8ebac674b849e9913f104cf2aa00839f7d298f36"
+  resolved "https://dev--vtextitantools.myvtex.com/_v/private/typings/linked/v1/ssesandbox04.progressive-discount-table@1.0.6+build1693532464/public/@types/ssesandbox04.progressive-discount-table#ef7ca6c8b6b5a6077a5d674ba117ec3388d35aba"
 
 sshpk@^1.7.0:
   version "1.17.0"

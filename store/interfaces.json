@@ -4,5 +4,8 @@
   },
   "progressive-discount-info": {
     "component": "ProgressiveDiscountInfo"
+  },
+  "current-price": {
+    "component": "CurrentPrice"
   }
 }

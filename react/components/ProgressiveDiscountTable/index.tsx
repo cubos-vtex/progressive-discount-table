@@ -1,21 +1,62 @@
+import type { FC } from 'react'
 import React from 'react'
 
-import { useProductWithBenefits } from '../../hooks/useProductWithBenefits'
+import {
+  useCurrentTradePolicy,
+  useFixedPrices,
+  useProductWithBenefits,
+  withQueryProvider,
+} from '../../services'
 import WrapperProgressiveDiscount from './wrapper'
 
-const ProgressiveDiscountTable = () => {
-  const { benefits, measurementUnit, price, teasers } = useProductWithBenefits()
+interface Props {
+  isModal: boolean
+}
 
-  if (!price) {
+const ProgressiveDiscountTable: FC<Props> = ({ isModal = false }) => {
+  const {
+    productName,
+    selectedItem,
+    benefits,
+    measurementUnit,
+    price,
+    teasers,
+  } = useProductWithBenefits()
+
+  const { data: tradePolicyData, isLoading: isLoadingTradePolicy } =
+    useCurrentTradePolicy()
+
+  const { data: fixedPrices, isLoading: isLoadingFixedPrices } = useFixedPrices(
+    selectedItem?.itemId,
+    tradePolicyData?.priceTables,
+    tradePolicyData?.tradePolicy
+  )
+
+  if (!price || isLoadingTradePolicy || isLoadingFixedPrices) {
     return null
+  }
+
+  if (fixedPrices?.length) {
+    return (
+      <WrapperProgressiveDiscount
+        isModal={isModal}
+        title={productName}
+        basePrice={price}
+        measurementUnit={measurementUnit}
+        benefits={fixedPrices.map((f) => ({
+          minQuantity: f.minQuantity ?? 1,
+          fixedPrice: f.value,
+        }))}
+      />
+    )
   }
 
   if (!benefits?.length) {
     if (!!teasers?.length && teasers?.[0]?.effects?.parameters?.length) {
       return (
         <WrapperProgressiveDiscount
-          isModal
-          title={teasers?.[0].name}
+          isModal={isModal}
+          title={productName}
           basePrice={price}
           measurementUnit={measurementUnit}
           benefits={teasers.map((t) => ({
@@ -34,6 +75,8 @@ const ProgressiveDiscountTable = () => {
 
   return (
     <WrapperProgressiveDiscount
+      isModal={isModal}
+      title={productName}
       basePrice={price}
       measurementUnit={measurementUnit}
       benefits={benefits.map((b) => ({
@@ -44,4 +87,4 @@ const ProgressiveDiscountTable = () => {
   )
 }
 
-export default ProgressiveDiscountTable
+export default withQueryProvider(ProgressiveDiscountTable)

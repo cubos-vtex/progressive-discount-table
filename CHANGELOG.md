@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Considers fixed prices on price by quantity table
+
 ## [1.0.6] - 2023-08-25
 
 ## [1.0.5] - 2023-08-25

@@ -2,9 +2,10 @@ import type { ClientsConfig } from '@vtex/api'
 import { LRUCache, method, Service } from '@vtex/api'
 
 import { Clients } from './clients'
+import { getFixedPrices } from './handlers/getFixedPrices'
 import { getPromotions } from './handlers/getPromotions'
 
-const TIMEOUT_MS = 800
+const TIMEOUT_MS = 10000
 const memoryCache = new LRUCache<string, never>({ max: 5000 })
 
 const clients: ClientsConfig<Clients> = {
@@ -13,8 +14,6 @@ const clients: ClientsConfig<Clients> = {
     default: {
       retries: 2,
       timeout: TIMEOUT_MS,
-    },
-    status: {
       memoryCache,
     },
   },
@@ -31,6 +30,9 @@ export default new Service({
     }),
     progressivePromotionsBySku: method({
       GET: getPromotions,
+    }),
+    fixedPricesBySku: method({
+      GET: getFixedPrices,
     }),
   },
 })

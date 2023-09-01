@@ -1400,6 +1400,19 @@
   resolved "https://registry.yarnpkg.com/@tabler/icons/-/icons-1.86.0.tgz#601910aab8ec43c82da5215725d59cdfc3802333"
   integrity sha512-lip2sPwOkWOqYtQIGGQ8ZaXynnIpFEDvzXN6RfRe4zuHBtEYZM0Bm9EfFGuKv5kllGjkjyy2386kapLR1JXwiw==
 
+"@tanstack/query-core@4.33.0":
+  version "4.33.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.33.0.tgz#7756da9a75a424e521622b1d84eb55b7a2b33715"
+  integrity sha512-qYu73ptvnzRh6se2nyBIDHGBQvPY1XXl3yR769B7B6mIDD7s+EZhdlWHQ67JI6UOTFRaI7wupnTnwJ3gE0Mr/g==
+
+"@tanstack/react-query@^4.33.0":
+  version "4.33.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-4.33.0.tgz#e927b0343a6ecaa948fee59e9ca98fe561062638"
+  integrity sha512-97nGbmDK0/m0B86BdiXzx3EW9RcDYKpnyL2+WwyuLHEgpfThYAnXFaMMmnTDuAO4bQJXEhflumIEUfKmP7ESGA==
+  dependencies:
+    "@tanstack/query-core" "4.33.0"
+    use-sync-external-store "^1.2.0"
+
 "@testing-library/dom@^7.22.3":
   version "7.31.2"
   resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-7.31.2.tgz#df361db38f5212b88555068ab8119f5d841a8c4a"
@@ -4879,9 +4892,9 @@ sprintf-js@~1.0.2:
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
   integrity sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==
 
-"ssesandbox04.progressive-discount-table@https://dev--vtextitantools.myvtex.com/_v/private/typings/linked/v1/ssesandbox04.progressive-discount-table@1.0.5+build1693083968/public/@types/ssesandbox04.progressive-discount-table":
+"ssesandbox04.progressive-discount-table@https://dev--vtextitantools.myvtex.com/_v/private/typings/linked/v1/ssesandbox04.progressive-discount-table@1.0.6+build1693532464/public/@types/ssesandbox04.progressive-discount-table":
   version "0.0.0"
-  resolved "https://dev--vtextitantools.myvtex.com/_v/private/typings/linked/v1/ssesandbox04.progressive-discount-table@1.0.5+build1693083968/public/@types/ssesandbox04.progressive-discount-table#8ebac674b849e9913f104cf2aa00839f7d298f36"
+  resolved "https://dev--vtextitantools.myvtex.com/_v/private/typings/linked/v1/ssesandbox04.progressive-discount-table@1.0.6+build1693532464/public/@types/ssesandbox04.progressive-discount-table#ef7ca6c8b6b5a6077a5d674ba117ec3388d35aba"
 
 sshpk@^1.7.0:
   version "1.17.0"
@@ -5236,6 +5249,11 @@ urix@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/urix/-/urix-0.1.0.tgz#da937f7a62e21fec1fd18d49b35c2935067a6c72"
   integrity sha512-Am1ousAhSLBeB9cG/7k7r2R0zj50uDRlZHPGbazid5s9rlF1F/QKYObEKSIunSjIOkJZqwRRLpvewjEkM7pSqg==
+
+use-sync-external-store@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz#7dbefd6ef3fe4e767a0cf5d7287aacfb5846928a"
+  integrity sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==
 
 use@^3.1.0:
   version "3.1.1"
