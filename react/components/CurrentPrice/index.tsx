@@ -1,5 +1,6 @@
 import type { FC } from 'react'
 import React from 'react'
+import type { FixedPrice, Maybe } from 'ssesandbox04.progressive-discount-table'
 import { useCssHandles } from 'vtex.css-handles'
 import { FormattedCurrency } from 'vtex.format-currency'
 
@@ -22,7 +23,7 @@ const CurrentPrice = ({ LoadingContent }: Props) => {
 
   const { price, selectedItem } = useProductWithBenefits()
 
-  const { data: fixedPrices, isLoading: isLoadingFixedPrices } = useFixedPrices(
+  const { data: fixedPrices, loading: isLoadingFixedPrices } = useFixedPrices(
     selectedItem?.itemId,
     tradePolicyData?.priceTables,
     tradePolicyData?.tradePolicy
@@ -33,7 +34,9 @@ const CurrentPrice = ({ LoadingContent }: Props) => {
   }
 
   if (fixedPrices?.length) {
-    const fixedPrice = fixedPrices.find((f) => f.minQuantity === 1)
+    const fixedPrice = fixedPrices.find(
+      (f: Maybe<FixedPrice>) => f?.minQuantity === 1
+    )
 
     if (fixedPrice) {
       return (

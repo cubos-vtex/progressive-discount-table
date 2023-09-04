@@ -1,0 +1,7 @@
+query getFixedPrices($skuId: String!) {
+  getFixedPrices(skuId: $skuId) {
+    tradePolicyId
+    value
+    minQuantity
+  }
+}

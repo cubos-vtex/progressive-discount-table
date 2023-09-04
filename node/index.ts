@@ -2,8 +2,9 @@ import type { ClientsConfig } from '@vtex/api'
 import { LRUCache, method, Service } from '@vtex/api'
 
 import { Clients } from './clients'
-import { getFixedPrices } from './handlers/getFixedPrices'
+import { getFixedPrices as getFixedPricesMiddleware } from './handlers/getFixedPrices'
 import { getPromotions } from './handlers/getPromotions'
+import { getFixedPrices } from './resolvers/getFixedPrices'
 
 const TIMEOUT_MS = 10000
 const memoryCache = new LRUCache<string, never>({ max: 5000 })
@@ -32,7 +33,14 @@ export default new Service({
       GET: getPromotions,
     }),
     fixedPricesBySku: method({
-      GET: getFixedPrices,
+      GET: getFixedPricesMiddleware,
     }),
+  },
+  graphql: {
+    resolvers: {
+      Query: {
+        getFixedPrices,
+      },
+    },
   },
 })

@@ -1,38 +1,40 @@
-import { useQuery } from '@tanstack/react-query'
+import { useQuery } from 'react-apollo'
+import type {
+  FixedPrice,
+  Maybe,
+  Query as QueryGetFixedPrices,
+} from 'ssesandbox04.progressive-discount-table'
 
-import type { ApiResponse } from '.'
-import { apiRequestFactory } from '.'
-
-type FixedPricesResponse = ApiResponse &
-  Array<{
-    tradePolicyId: string
-    value: number
-    minQuantity?: number
-  }>
+import GET_FIXED_PRICES from '../graphql/getFixedPrices.graphql'
 
 export const useFixedPrices = (
   skuId?: string,
   priceTables?: string[],
   tradePolicy?: string
 ) => {
-  return useQuery({
-    queryKey: ['fixedPrices', skuId, priceTables, tradePolicy],
-    queryFn: async () =>
-      apiRequestFactory<FixedPricesResponse>(
-        `/_v/fixed-prices/${skuId}`
-      )().then((fixedPrices) => {
-        const fixedPricesByPriceTables = fixedPrices.filter((fixedPrice) =>
-          priceTables?.includes(fixedPrice.tradePolicyId)
-        )
+  const { data, loading, error } = useQuery<QueryGetFixedPrices>(
+    GET_FIXED_PRICES,
+    {
+      variables: { skuId },
+      skip: !skuId || !tradePolicy,
+    }
+  )
 
-        if (fixedPricesByPriceTables?.length) {
-          return fixedPricesByPriceTables
-        }
+  const fixedPricesByPriceTables = data?.getFixedPrices?.filter(
+    (fixedPrice: Maybe<FixedPrice>) =>
+      !!fixedPrice && priceTables?.includes(fixedPrice.tradePolicyId)
+  )
 
-        return fixedPrices.filter(
-          (fixedPrice) => fixedPrice.tradePolicyId === tradePolicy
-        )
-      }),
-    enabled: !!skuId && !!tradePolicy,
-  })
+  if (fixedPricesByPriceTables?.length) {
+    return { data: fixedPricesByPriceTables, loading, error }
+  }
+
+  return {
+    data: data?.getFixedPrices?.filter(
+      (fixedPrice: Maybe<FixedPrice>) =>
+        fixedPrice?.tradePolicyId === tradePolicy
+    ),
+    loading,
+    error,
+  }
 }

@@ -1,0 +1,9 @@
+type FixedPrice {
+  tradePolicyId: String!
+  value: Float!
+  minQuantity: Int
+}
+
+type Query {
+  getFixedPrices(skuId: String!): [FixedPrice]
+}

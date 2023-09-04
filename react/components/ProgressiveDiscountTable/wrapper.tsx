@@ -119,9 +119,6 @@ const WrapperProgressiveDiscount = ({
     >
       {isModal ? (
         <>
-          {/* <span role="button" tabIndex={-1} onKeyDown={toggle} onClick={toggle}>
-            {header}
-          </span> */}
           <Button
             noUpperCase
             variation="tertiary"

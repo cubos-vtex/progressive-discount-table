@@ -1,5 +1,6 @@
 import type { FC } from 'react'
 import React from 'react'
+import type { FixedPrice, Maybe } from 'ssesandbox04.progressive-discount-table'
 
 import {
   useCurrentTradePolicy,
@@ -26,7 +27,7 @@ const ProgressiveDiscountTable: FC<Props> = ({ isModal = false }) => {
   const { data: tradePolicyData, isLoading: isLoadingTradePolicy } =
     useCurrentTradePolicy()
 
-  const { data: fixedPrices, isLoading: isLoadingFixedPrices } = useFixedPrices(
+  const { data: fixedPrices, loading: isLoadingFixedPrices } = useFixedPrices(
     selectedItem?.itemId,
     tradePolicyData?.priceTables,
     tradePolicyData?.tradePolicy
@@ -43,9 +44,9 @@ const ProgressiveDiscountTable: FC<Props> = ({ isModal = false }) => {
         title={productName}
         basePrice={price}
         measurementUnit={measurementUnit}
-        benefits={fixedPrices.map((f) => ({
-          minQuantity: f.minQuantity ?? 1,
-          fixedPrice: f.value,
+        benefits={fixedPrices.map((f: Maybe<FixedPrice>) => ({
+          minQuantity: f?.minQuantity ?? 1,
+          fixedPrice: f?.value,
         }))}
       />
     )

@@ -56,7 +56,6 @@ export const apiRequestFactory = <T extends ApiResponse>(
         typeof json?.response?.data === 'object'
           ? json?.response?.data?.error
           : json?.response?.data ??
-            json?.response?.data ??
             json?.message ??
             json?.code ??
             response.status.toString()

@@ -1,5 +1,6 @@
 import type { IOContext, InstanceOptions } from '@vtex/api'
 import { ExternalClient } from '@vtex/api'
+import type { FixedPrice, Maybe } from 'ssesandbox04.progressive-discount-table'
 
 export default class FixedPricesClient extends ExternalClient {
   constructor(context: IOContext, options?: InstanceOptions) {
@@ -13,6 +14,6 @@ export default class FixedPricesClient extends ExternalClient {
   }
 
   public get(skuId: string) {
-    return this.http.get(`/${skuId}/fixed`)
+    return this.http.get<Maybe<FixedPrice[]>>(`/${skuId}/fixed`)
   }
 }
