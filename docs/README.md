@@ -1,4 +1,4 @@
-[![Release and Deploy App](https://github.com/tiago-freire/progressive-discount-table/actions/workflows/toolbelt-workflow.yml/badge.svg)](https://github.com/tiago-freire/progressive-discount-table/actions/workflows/toolbelt-workflow.yml)
+[![Publish and Deploy App](https://github.com/tiago-freire/progressive-discount-table/actions/workflows/publish-and-deploy.yml/badge.svg)](https://github.com/tiago-freire/progressive-discount-table/actions/workflows/publish-and-deploy.yml)
 
 # Progressive Discount Table
 
