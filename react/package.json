@@ -18,12 +18,12 @@
     "@vtex/tsconfig": "^0.4.4",
     "apollo-cache-inmemory": "^1.6.5",
     "graphql": "^14.6.0",
-    "ssesandbox04.progressive-discount-table": "https://dev--vtextitantools.myvtex.com/_v/private/typings/linked/v1/ssesandbox04.progressive-discount-table@2.0.0+build1693838841/public/@types/ssesandbox04.progressive-discount-table",
+    "ssesandbox04.progressive-discount-table": "http://ssesandbox04.vtexassets.com/_v/public/typings/v1/ssesandbox04.progressive-discount-table@2.0.1/public/@types/ssesandbox04.progressive-discount-table",
     "typescript": "3.9.7",
     "vtex.css-handles": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.css-handles@0.4.4/public/@types/vtex.css-handles",
     "vtex.format-currency": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.format-currency@0.4.1/public/@types/vtex.format-currency",
     "vtex.product-context": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-context@0.10.0/public/@types/vtex.product-context",
-    "vtex.render-runtime": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.134.0/public/@types/vtex.render-runtime",
+    "vtex.render-runtime": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.134.2/public/@types/vtex.render-runtime",
     "vtex.styleguide": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.146.9/public/@types/vtex.styleguide"
   }
 }
