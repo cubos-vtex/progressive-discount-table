@@ -19,9 +19,6 @@
     "store": "0.x",
     "messages": "1.x"
   },
-  "scripts": {
-    "postreleasy": "vtex publish --force"
-  },
   "policies": [
     {
       "name": "colossus-fire-event"
