@@ -1,4 +1,5 @@
 {
   "store/view-price-by-volume": "View price by quantity",
-  "store/from-price": "Or from"
+  "store/from-price": "Or from",
+  "store/start-price": "Starts at"
 }

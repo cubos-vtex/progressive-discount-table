@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- Handles different prices and minimum price on current price
+
 ## [2.0.2] - 2023-10-16
 
 ## [2.0.1] - 2023-09-04

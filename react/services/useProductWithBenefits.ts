@@ -31,10 +31,21 @@ export const useProductWithBenefits = () => {
   )
 
   const productName = productContextValue?.product?.productName
+
+  const sortedPrices = productContextValue?.product?.items
+    .map((item) => {
+      const seller = getDefaultSeller(item.sellers)
+
+      return seller?.commertialOffer?.Price ?? 0
+    })
+    .sort((a, b) => a - b)
+
+  const minPrice = sortedPrices?.[0] ?? 0
+  const hasDifferentPrices = sortedPrices?.some((price) => price !== minPrice)
   const selectedItem = productContextValue?.selectedItem
+  const measurementUnit = selectedItem?.measurementUnit ?? ''
   const seller = getDefaultSeller(selectedItem?.sellers)
   const commertialOffer = seller?.commertialOffer
-  const measurementUnit = selectedItem?.measurementUnit ?? ''
   const price = commertialOffer?.Price
   const teasers = commertialOffer?.teasers
 
@@ -43,6 +54,8 @@ export const useProductWithBenefits = () => {
     selectedItem,
     benefits,
     measurementUnit,
+    minPrice,
+    hasDifferentPrices,
     price,
     teasers,
   }

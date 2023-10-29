@@ -1,5 +1,6 @@
 import type { FC } from 'react'
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 import type { FixedPrice, Maybe } from 'ssesandbox04.progressive-discount-table'
 import { useCssHandles } from 'vtex.css-handles'
 import { FormattedCurrency } from 'vtex.format-currency'
@@ -16,12 +17,13 @@ type Props = {
 }
 
 const CurrentPrice = ({ LoadingContent }: Props) => {
-  const handles = useCssHandles(['currentPriceContainer'])
+  const handles = useCssHandles(['currentPriceContainer', 'startPrice'])
 
   const { data: tradePolicyData, isLoading: isLoadingTradePolicy } =
     useCurrentTradePolicy()
 
-  const { price, selectedItem } = useProductWithBenefits()
+  const { price, hasDifferentPrices, minPrice, selectedItem } =
+    useProductWithBenefits()
 
   const { data: fixedPrices, loading: isLoadingFixedPrices } = useFixedPrices(
     selectedItem?.itemId,
@@ -45,6 +47,17 @@ const CurrentPrice = ({ LoadingContent }: Props) => {
         </div>
       )
     }
+  }
+
+  if (hasDifferentPrices) {
+    return (
+      <div className={`flex flex-column ${handles.currentPriceContainer}`}>
+        <span className={handles.startPrice}>
+          <FormattedMessage id="store/start-price" />
+        </span>
+        <FormattedCurrency value={minPrice} />
+      </div>
+    )
   }
 
   return (
