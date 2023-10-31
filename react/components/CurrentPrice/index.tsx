@@ -14,9 +14,10 @@ import {
 
 type Props = {
   LoadingContent?: FC<unknown>
+  showMinPrice?: boolean
 }
 
-const CurrentPrice = ({ LoadingContent }: Props) => {
+const CurrentPrice = ({ LoadingContent, showMinPrice = false }: Props) => {
   const handles = useCssHandles(['currentPriceContainer', 'startPrice'])
 
   const { data: tradePolicyData, isLoading: isLoadingTradePolicy } =
@@ -49,7 +50,7 @@ const CurrentPrice = ({ LoadingContent }: Props) => {
     }
   }
 
-  if (hasDifferentPrices) {
+  if (showMinPrice && hasDifferentPrices) {
     return (
       <div className={`flex flex-column ${handles.currentPriceContainer}`}>
         <span className={handles.startPrice}>
