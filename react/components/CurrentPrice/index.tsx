@@ -36,6 +36,17 @@ const CurrentPrice = ({ LoadingContent, showMinPrice = false }: Props) => {
     return LoadingContent ? <LoadingContent /> : null
   }
 
+  if (showMinPrice && hasDifferentPrices) {
+    return (
+      <div className={`flex flex-column ${handles.currentPriceContainer}`}>
+        <span className={handles.startPrice}>
+          <FormattedMessage id="store/start-price" />
+        </span>
+        <FormattedCurrency value={minPrice} />
+      </div>
+    )
+  }
+
   if (fixedPrices?.length) {
     const fixedPrice = fixedPrices.find(
       (f: Maybe<FixedPrice>) => f?.minQuantity === 1
@@ -48,17 +59,6 @@ const CurrentPrice = ({ LoadingContent, showMinPrice = false }: Props) => {
         </div>
       )
     }
-  }
-
-  if (showMinPrice && hasDifferentPrices) {
-    return (
-      <div className={`flex flex-column ${handles.currentPriceContainer}`}>
-        <span className={handles.startPrice}>
-          <FormattedMessage id="store/start-price" />
-        </span>
-        <FormattedCurrency value={minPrice} />
-      </div>
-    )
   }
 
   return (
