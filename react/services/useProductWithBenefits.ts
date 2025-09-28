@@ -32,6 +32,8 @@ export const useProductWithBenefits = () => {
 
   const productName = productContextValue?.product?.productName
 
+  const skuIds = productContextValue?.product?.items.map((item) => item.itemId)
+
   const sortedPrices = productContextValue?.product?.items
     .map((item) => {
       const seller = getDefaultSeller(item.sellers)
@@ -47,16 +49,19 @@ export const useProductWithBenefits = () => {
   const seller = getDefaultSeller(selectedItem?.sellers)
   const commertialOffer = seller?.commertialOffer
   const price = commertialOffer?.Price
+  const listPrice = commertialOffer?.ListPrice
   const teasers = commertialOffer?.teasers
 
   return {
     productName,
+    skuIds,
     selectedItem,
     benefits,
     measurementUnit,
     minPrice,
     hasDifferentPrices,
     price,
+    listPrice,
     teasers,
   }
 }

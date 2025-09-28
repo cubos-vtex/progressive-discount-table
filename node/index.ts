@@ -5,6 +5,7 @@ import { Clients } from './clients'
 import { getFixedPrices as getFixedPricesMiddleware } from './handlers/getFixedPrices'
 import { getPromotions } from './handlers/getPromotions'
 import { getFixedPrices } from './resolvers/getFixedPrices'
+import { getFixedPricesBySkuIds } from './resolvers/getFixedPricesBySkuIds'
 
 const TIMEOUT_MS = 3000
 const CONCURRENCY = 10
@@ -45,6 +46,7 @@ export default new Service({
     resolvers: {
       Query: {
         getFixedPrices,
+        getFixedPricesBySkuIds,
       },
     },
   },

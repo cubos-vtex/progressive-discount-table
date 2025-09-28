@@ -2,25 +2,28 @@ import { useQuery } from 'react-apollo'
 import type {
   FixedPrice,
   Maybe,
-  Query as QueryGetFixedPrices,
+  Query,
+  QueryGetFixedPricesBySkuIdsArgs,
 } from 'ssesandbox04.progressive-discount-table'
 
-import GET_FIXED_PRICES from '../graphql/getFixedPrices.graphql'
+import GET_FIXED_PRICES from '../graphql/getFixedPricesBySkuIds.graphql'
+
+type QueryGetFixedPrices = Pick<Query, 'getFixedPricesBySkuIds'>
 
 export const useFixedPrices = (
-  skuId?: string,
+  skuIds?: Array<string | null | undefined>,
   priceTables?: string[],
   tradePolicy?: string
 ) => {
-  const { data, loading, error } = useQuery<QueryGetFixedPrices>(
-    GET_FIXED_PRICES,
-    {
-      variables: { skuId },
-      skip: !skuId || !tradePolicy,
-    }
-  )
+  const { data, loading, error } = useQuery<
+    QueryGetFixedPrices,
+    QueryGetFixedPricesBySkuIdsArgs
+  >(GET_FIXED_PRICES, {
+    skip: !skuIds || !tradePolicy,
+    variables: { skuIds: skuIds as string[] },
+  })
 
-  const fixedPricesByPriceTables = data?.getFixedPrices?.filter(
+  const fixedPricesByPriceTables = data?.getFixedPricesBySkuIds?.filter(
     (fixedPrice: Maybe<FixedPrice>) =>
       !!fixedPrice && priceTables?.includes(fixedPrice.tradePolicyId)
   )
@@ -30,7 +33,7 @@ export const useFixedPrices = (
   }
 
   return {
-    data: data?.getFixedPrices?.filter(
+    data: data?.getFixedPricesBySkuIds?.filter(
       (fixedPrice: Maybe<FixedPrice>) =>
         fixedPrice?.tradePolicyId === tradePolicy
     ),

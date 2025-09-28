@@ -28,7 +28,7 @@ const ProgressiveDiscountTable: FC<Props> = ({ isModal = false }) => {
     useCurrentTradePolicy()
 
   const { data: fixedPrices, loading: isLoadingFixedPrices } = useFixedPrices(
-    selectedItem?.itemId,
+    [selectedItem?.itemId],
     tradePolicyData?.priceTables,
     tradePolicyData?.tradePolicy
   )
