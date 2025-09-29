@@ -4892,6 +4892,10 @@ sprintf-js@~1.0.2:
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
   integrity sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==
 
+"ssesandbox04.progressive-discount-table@http://ssesandbox04.vtexassets.com/_v/public/typings/v1/ssesandbox04.progressive-discount-table@2.0.8/public/@types/ssesandbox04.progressive-discount-table":
+  version "2.0.8"
+  resolved "http://ssesandbox04.vtexassets.com/_v/public/typings/v1/ssesandbox04.progressive-discount-table@2.0.8/public/@types/ssesandbox04.progressive-discount-table#cd78db3fbb2a5fa7db2be08e04fc8e16e4b45543"
+
 sshpk@^1.7.0:
   version "1.17.0"
   resolved "https://registry.yarnpkg.com/sshpk/-/sshpk-1.17.0.tgz#578082d92d4fe612b13007496e543fa0fbcbe4c5"
