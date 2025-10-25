@@ -1,7 +1,7 @@
 {
   "name": "progressive-discount-table",
   "vendor": "ssesandbox04",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "title": "Progressive Discount Table",
   "description": "Renders a price by quantity table on products with progressive discount",
   "categories": [],
